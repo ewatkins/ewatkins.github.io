@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+- "9"
+# Cache node_modules between builds
+cache:
+  directories:
+  - "node_modules"
+# Build website
+script:
+  - npm test
+  - npm run build
+# Deploy gh-pages to master branch
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: build
+  target-branch: master
+  verbose: true
+  fqdn: "ewatkins.dev"
+  on:
+    branch: "dev"
